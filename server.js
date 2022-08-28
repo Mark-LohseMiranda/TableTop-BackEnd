@@ -17,12 +17,12 @@ const PORT = process.env.PORT || 5001;
 const models = require("./models");
 
 //LOCAL
-// app.use(cors());
+app.use(cors());
 
 //DEPLOYED
-app.use(cors({
-    origin:["http://ec2-3-86-81-95.compute-1.amazonaws.com/"]
-}))
+// app.use(cors({
+//     origin:["http://ec2-3-86-81-95.compute-1.amazonaws.com/"]
+// }))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
