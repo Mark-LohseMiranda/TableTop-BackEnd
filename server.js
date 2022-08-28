@@ -12,7 +12,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer);
 socketServer(io);
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5001;
 
 const models = require("./models");
 
@@ -21,7 +21,7 @@ const models = require("./models");
 
 //DEPLOYED
 app.use(cors({
-    origin:["https://table-top-fe.herokuapp.com"]
+    origin:["http://ec2-3-86-81-95.compute-1.amazonaws.com/"]
 }))
 
 app.use(express.urlencoded({ extended: true }));
