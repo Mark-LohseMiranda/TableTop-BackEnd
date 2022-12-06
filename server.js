@@ -15,10 +15,14 @@ const https_options = {
 
 const app = express();
 const socketServer = require("./controllers/socketServer");
-const httpServer = createServer(app);
+const httpsServer = https.createServer({
+  ca: fs.readFileSync("ca_bundle.crt"),
+ key: fs.readFileSync("private.key"),
+ cert: fs.readFileSync("certificate.crt")
+});
 
 
-const io = new Server(httpServer);
+const io = new Server(httpsServer);
 socketServer(io);
 const PORT = process.env.PORT || 5001;
 
