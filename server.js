@@ -18,7 +18,11 @@ const app = express();
 // const httpsServer = https.createServer(https_options, app);
 
 https.createServer(https_options, app)
-const io = new Server(https);
+const io = new Server(https,{
+  cors: {
+    origin: "https://tabletop.mark-lohsemiranda.com"
+  }
+});
 socketServer(io);
 // const PORT = process.env.PORT || 5001;
 
