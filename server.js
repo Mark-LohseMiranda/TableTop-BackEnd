@@ -4,6 +4,14 @@ const sequelize = require("./config/connection.js");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const https = require('https');
+const fs = require('fs');
+
+const https_options = {
+  ca: fs.readFileSync("ca_bundle.crt"),
+ key: fs.readFileSync("private.key"),
+ cert: fs.readFileSync("certificate.crt")
+}
 
 const app = express();
 const socketServer = require("./controllers/socketServer");
@@ -17,12 +25,12 @@ const PORT = process.env.PORT || 5001;
 const models = require("./models");
 
 //LOCAL
-app.use(cors());
+// app.use(cors());
 
 //DEPLOYED
-// app.use(cors({
-//     origin:["http://ec2-3-86-81-95.compute-1.amazonaws.com/"]
-// }))
+app.use(cors({
+    origin:["https://tabletop.mark-lohsemiranda.com/"]
+}))
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -31,7 +39,8 @@ app.use(express.json());
 app.use("/", allRoutes);
 
 sequelize.sync({ force: false }).then(function () {
-  httpServer.listen(PORT, function () {
-    console.log("App listening on PORT " + PORT);
-  });
+  // httpServer.listen(PORT, function () {
+  //   console.log("App listening on PORT " + PORT);
+  // });
+  https.createServer(https_options, app).listen(5001)
 });
