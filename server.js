@@ -1,11 +1,12 @@
 const express = require("express");
 const allRoutes = require("./controllers");
 const sequelize = require("./config/connection.js");
-const { createServer } = require("http");
+// const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const https = require('https');
 const fs = require('fs');
+const socketServer = require("./controllers/socketServer");
 
 const https_options = {
   ca: fs.readFileSync("ca_bundle.crt"),
@@ -14,15 +15,14 @@ const https_options = {
 }
 
 const app = express();
-// const socketServer = require("./controllers/socketServer");
 // const httpsServer = https.createServer(https_options, app);
 
+https.createServer(https_options, app)
+const io = new Server(https);
+socketServer(io);
+// const PORT = process.env.PORT || 5001;
 
-// const io = new Server(httpsServer);
-// socketServer(io);
-const PORT = process.env.PORT || 5001;
-
-const models = require("./models");
+// const models = require("./models");
 
 //LOCAL
 // app.use(cors());
@@ -42,5 +42,5 @@ sequelize.sync({ force: false }).then(function () {
   // httpServer.listen(PORT, function () {
   //   console.log("App listening on PORT " + PORT);
   // });
-  https.createServer(https_options, app).listen(5001)
+  https.listen(5001)
 });
