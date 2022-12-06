@@ -18,25 +18,25 @@ const app = express();
 // const httpsServer = https.createServer(https_options, app);
 
 const https = createServer(https_options, app);
-// const io = new Server(https,{
-//   cors: {
-//     origin: "https://tabletop.mark-lohsemiranda.com"
-//   }
-// });
-// socketServer(io);
+const io = new Server(https,{
+  cors: {
+    origin: "https://tabletop.mark-lohsemiranda.com"
+  }
+});
+socketServer(io);
 // const PORT = process.env.PORT || 5001;
 
 // const models = require("./models");
 
 //LOCAL
-// app.use(cors());
+app.use(cors());
 
 //DEPLOYED
-app.use(
-  cors({
-    origin: ["https://tabletop.mark-lohsemiranda.com/"],
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://tabletop.mark-lohsemiranda.com/"],
+//   })
+// );
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
