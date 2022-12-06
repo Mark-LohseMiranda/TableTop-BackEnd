@@ -29,14 +29,14 @@ socketServer(io);
 // const models = require("./models");
 
 //LOCAL
-app.use(cors());
+// app.use(cors());
 
 //DEPLOYED
-// app.use(
-//   cors({
-//     origin: ["https://tabletop.mark-lohsemiranda.com/"],
-//   })
-// );
+app.use(
+  cors({
+    origin: ["https://tabletop.mark-lohsemiranda.com/"],
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
