@@ -15,11 +15,7 @@ const https_options = {
 
 const app = express();
 const socketServer = require("./controllers/socketServer");
-const httpsServer = https.createServer({
-  ca: fs.readFileSync("ca_bundle.crt"),
- key: fs.readFileSync("private.key"),
- cert: fs.readFileSync("certificate.crt")
-});
+const httpsServer = https.createServer(https_options, app);
 
 
 const io = new Server(httpsServer);
