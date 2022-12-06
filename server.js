@@ -14,12 +14,12 @@ const https_options = {
 }
 
 const app = express();
-const socketServer = require("./controllers/socketServer");
-const httpsServer = https.createServer(https_options, app);
+// const socketServer = require("./controllers/socketServer");
+// const httpsServer = https.createServer(https_options, app);
 
 
-const io = new Server(httpsServer);
-socketServer(io);
+// const io = new Server(httpsServer);
+// socketServer(io);
 const PORT = process.env.PORT || 5001;
 
 const models = require("./models");
